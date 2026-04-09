@@ -1,0 +1,518 @@
+/* ══════════════════════════════════════════════════════════
+   Scene.module.css — Japanese Room Interior (v2 polished)
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Scene Container ── */
+.scene {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--shoji-paper);
+}
+
+/* ── Main Room Row ── */
+.room {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   GARDEN WINDOW (Left ~42%)
+   ══════════════════════════════════════════════════════════ */
+.garden {
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top wooden lintel beam */
+.lintel {
+  height: 44px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 0%,
+    var(--wood-shadow) 8%,
+    color-mix(in srgb, var(--wood-frame) 92%, #d4b896 8%) 30%,
+    color-mix(in srgb, var(--wood-frame) 82%, #f0e0c8 18%) 52%,
+    var(--wood-frame) 72%,
+    var(--wood-shadow) 95%,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 100%
+  );
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 3;
+}
+
+/* Wood grain texture (shared by lintel & topRail) */
+.lintel::after, .topRail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 35px,
+    rgba(0,0,0,0.02) 35px,
+    rgba(0,0,0,0.03) 36px,
+    transparent 36px,
+    transparent 80px,
+    rgba(0,0,0,0.015) 80px,
+    rgba(0,0,0,0.02) 81px
+  );
+  pointer-events: none;
+}
+
+.gardenInner {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* Left wooden pillar */
+.pillarLeft {
+  width: 24px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 0%,
+    var(--wood-shadow) 10%,
+    var(--wood-frame) 28%,
+    color-mix(in srgb, var(--wood-frame) 78%, #f0e0c8 22%) 48%,
+    var(--wood-frame) 68%,
+    var(--wood-shadow) 92%,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 100%
+  );
+  box-shadow:
+    3px 0 10px rgba(0,0,0,0.22),
+    inset -1px 0 0 rgba(255,255,255,0.06);
+  position: relative;
+  z-index: 2;
+}
+
+/* Vertical grain on pillars */
+.pillarLeft::after, .pillarCenter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 50px,
+    rgba(0,0,0,0.018) 50px,
+    rgba(0,0,0,0.025) 51px,
+    transparent 51px,
+    transparent 120px,
+    rgba(0,0,0,0.012) 120px,
+    rgba(0,0,0,0.018) 121px
+  );
+  pointer-events: none;
+}
+
+/* Garden view container */
+.gardenView {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Depth vignette around garden edges */
+.gardenVignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.14) 0%, transparent 10%),
+    linear-gradient(0deg, rgba(0,0,0,0.1) 0%, transparent 8%),
+    linear-gradient(90deg, rgba(0,0,0,0.08) 0%, transparent 6%),
+    linear-gradient(270deg, rgba(0,0,0,0.06) 0%, transparent 6%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   CENTER PILLAR
+   ══════════════════════════════════════════════════════════ */
+.pillarCenter {
+  width: 22px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 0%,
+    var(--wood-shadow) 8%,
+    var(--wood-frame) 24%,
+    color-mix(in srgb, var(--wood-frame) 76%, #f0e0c8 24%) 46%,
+    var(--wood-frame) 70%,
+    var(--wood-shadow) 92%,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 100%
+  );
+  box-shadow: 0 0 16px rgba(0,0,0,0.28);
+  position: relative;
+  z-index: 4;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   RIGHT SECTION (Shoji Wall + Doors)
+   ══════════════════════════════════════════════════════════ */
+.rightSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Top rail */
+.topRail {
+  height: 44px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 0%,
+    var(--wood-shadow) 8%,
+    color-mix(in srgb, var(--wood-frame) 92%, #d4b896 8%) 30%,
+    color-mix(in srgb, var(--wood-frame) 82%, #f0e0c8 18%) 52%,
+    var(--wood-frame) 72%,
+    var(--wood-shadow) 95%,
+    color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 100%
+  );
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 3;
+}
+
+.rightBody {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SHOJI WALL — calendar hangs here
+   Paper surface with subtle kumiko grid pattern
+   ══════════════════════════════════════════════════════════ */
+.shojiWall {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background:
+    /* Kumiko grid (subtle wooden lines through the paper) */
+    linear-gradient(to right, color-mix(in srgb, var(--wood-frame) 28%, transparent) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--wood-frame) 28%, transparent) 1.2px, transparent 1.2px),
+    /* Paper texture — warm fibre look */
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(200,180,150,0.02) 6px,
+      rgba(200,180,150,0.02) 7px
+    ),
+    /* Warm paper gradient */
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--shoji-paper) 96%, #fff 4%) 0%,
+      var(--shoji-paper) 40%,
+      color-mix(in srgb, var(--shoji-paper) 94%, #efe5d5 6%) 100%
+    );
+  background-size:
+    calc(100% / 5) calc(100% / 7),
+    calc(100% / 5) calc(100% / 7),
+    auto,
+    auto;
+  /* Paper inset feel */
+  box-shadow:
+    inset 2px 0 8px rgba(0,0,0,0.04),
+    inset -2px 0 8px rgba(0,0,0,0.03);
+}
+
+/* Light spill from garden window */
+.lightSpill {
+  position: absolute;
+  left: -2%;
+  top: 5%;
+  width: 50%;
+  height: 65%;
+  background: radial-gradient(
+    ellipse 100% 80% at 0% 40%,
+    rgba(255, 248, 220, 0.2) 0%,
+    rgba(255, 245, 200, 0.08) 45%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: lightDrift 10s ease-in-out infinite alternate;
+}
+
+@keyframes lightDrift {
+  0%   { opacity: 0.65; transform: translateY(0); }
+  100% { opacity: 1;    transform: translateY(-6px); }
+}
+
+
+/* ── Hanging System ── */
+.hangerSystem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6%;
+  z-index: 2;
+}
+
+/* Nail / hook */
+.nail {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #9a9a9a, #444);
+  box-shadow:
+    0 1px 4px rgba(0,0,0,0.45),
+    0 0 0 0.5px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 3;
+}
+
+/* Nail shadow */
+.nail::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  width: 10px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+  filter: blur(2px);
+}
+
+/* Rope SVG — shortened & tight */
+.ropes {
+  width: clamp(80px, 10vw, 130px);
+  height: auto;
+  margin-top: -2px;
+  z-index: 2;
+}
+
+.ropes line {
+  stroke: var(--wood-shadow);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+/* Calendar area */
+.calendarArea {
+  position: relative;
+  margin-top: -6px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 6%;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SHOJI SLIDING DOORS (Far Right)
+   ══════════════════════════════════════════════════════════ */
+.shojiDoors {
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  border-left: 3px solid color-mix(in srgb, var(--wood-frame) 90%, #000 10%);
+}
+
+/* Individual door panel */
+.doorPanel {
+  flex: 1;
+  position: relative;
+  border: 3.5px solid var(--wood-frame);
+  /* Paper + kumiko grid */
+  background:
+    /* Grid lines — thicker than wall, visible */
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--wood-frame) 45%, transparent) 2px,
+      transparent 2px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--wood-frame) 45%, transparent) 2px,
+      transparent 2px
+    ),
+    /* Frosted paper with warm tint */
+    linear-gradient(
+      145deg,
+      rgba(255,255,250,0.94) 0%,
+      rgba(248,244,235,0.9) 50%,
+      rgba(242,238,228,0.92) 100%
+    );
+  background-size:
+    calc(100% / 4) calc(100% / 5),
+    calc(100% / 4) calc(100% / 5),
+    auto;
+  /* Recessed paper feel — light comes through */
+  box-shadow:
+    inset 0 0 40px rgba(255,255,240,0.3),
+    inset 0 0 8px rgba(0,0,0,0.04);
+}
+
+/* Door handle — subtle indent on right door */
+.doorPanel:last-child::after {
+  content: '';
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 20px;
+  border-radius: 2.5px;
+  background: linear-gradient(180deg, var(--wood-shadow), var(--wood-frame), var(--wood-shadow));
+  opacity: 0.55;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.15);
+}
+
+/* Divider between door panels */
+.doorDivider {
+  width: 4px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--wood-shadow) 0%,
+    var(--wood-frame) 40%,
+    var(--wood-frame) 60%,
+    var(--wood-shadow) 100%
+  );
+  box-shadow: 0 0 4px rgba(0,0,0,0.12);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   TATAMI FLOOR
+   ══════════════════════════════════════════════════════════ */
+.tatami {
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  border-top: 4px solid color-mix(in srgb, var(--wood-shadow) 85%, #000 15%);
+  position: relative;
+  z-index: 2;
+}
+
+/* Shadow where wall meets floor */
+.tatami::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Individual tatami mat */
+.tatamiMat {
+  flex: 1;
+  background:
+    /* Rush straw lines — horizontal */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(160,140,80,0.08) 2px,
+      rgba(160,140,80,0.08) 3px
+    ),
+    /* Cross-wise subtle texture */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 5px,
+      rgba(0,0,0,0.012) 5px,
+      rgba(0,0,0,0.012) 6px
+    ),
+    /* Base tatami color — alternating warm/cool */
+    linear-gradient(180deg, #D0C498 0%, #C6BA8E 45%, #BEB286 100%);
+  border: 2px solid #2A2218;
+}
+
+/* Slightly different tone for alternating mats */
+.tatamiMat:nth-child(odd) {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(160,140,80,0.08) 2px,
+      rgba(160,140,80,0.08) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 5px,
+      rgba(0,0,0,0.012) 5px,
+      rgba(0,0,0,0.012) 6px
+    ),
+    linear-gradient(180deg, #CCC296 0%, #C4B88C 45%, #BCB084 100%);
+  border: 2px solid #2A2218;
+}
+
+/* Dark gap between tatami mats */
+.tatamiGap {
+  width: 3px;
+  flex-shrink: 0;
+  background: #1A1410;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .garden { width: 38%; }
+  .shojiDoors { width: 36%; }
+  .lintel, .topRail { height: 36px; }
+  .tatami { height: 56px; }
+  .pillarLeft { width: 18px; }
+  .pillarCenter { width: 16px; }
+}
+
+@media (max-width: 768px) {
+  .room {
+    flex-direction: column;
+  }
+  .garden {
+    width: 100%;
+    height: 35vh;
+  }
+  .pillarCenter {
+    width: 100%;
+    height: 16px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--wood-shadow) 90%, #000 10%) 0%,
+      var(--wood-frame) 30%,
+      color-mix(in srgb, var(--wood-frame) 80%, #f0e0c8 20%) 55%,
+      var(--wood-frame) 75%,
+      var(--wood-shadow) 100%
+    );
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+  }
+  .rightSection { flex: 1; }
+  .shojiDoors { width: 35%; }
+  .tatami { height: 48px; }
+  .ropes { width: clamp(60px, 15vw, 100px); }
+}

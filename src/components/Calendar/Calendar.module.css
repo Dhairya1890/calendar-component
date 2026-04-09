@@ -1,0 +1,398 @@
+/* ══════════════════════════════════════════════════════════
+   Calendar.module.css — Hanging Scroll Calendar Paper
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Paper container ── */
+.paper {
+  width: clamp(220px, 84%, 370px);
+  position: relative;
+  /* Aged parchment texture */
+  background:
+    radial-gradient(ellipse at 18% 25%, rgba(200,182,148,0.1), transparent 45%),
+    radial-gradient(ellipse at 82% 68%, rgba(195,178,140,0.08), transparent 40%),
+    radial-gradient(ellipse at 50% 90%, rgba(188,170,130,0.06), transparent 35%),
+    repeating-linear-gradient(
+      155deg,
+      transparent 0px, transparent 5px,
+      rgba(175,155,115,0.025) 5px,
+      rgba(175,155,115,0.025) 6px
+    ),
+    linear-gradient(
+      175deg,
+      #F4EFE2 0%, #F0EADC 25%,
+      #ECE5D5 55%, #E8E1D0 100%
+    );
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.12),
+    0 2px 6px rgba(0,0,0,0.08),
+    inset 0 0 0 1px rgba(180,160,120,0.12);
+  padding: clamp(10px, 1.8vw, 18px);
+  padding-top: 8px;
+  transform: rotate(-0.4deg);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 0.5vw, 6px);
+}
+
+
+/* ── Top wooden dowel ── */
+.dowel {
+  position: absolute;
+  top: -6px;
+  left: 8%;
+  right: 8%;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    var(--wood-shadow, #8a7558) 0%,
+    var(--wood-frame, #c8a97e) 35%,
+    color-mix(in srgb, var(--wood-frame, #c8a97e) 85%, #fff 15%) 55%,
+    var(--wood-frame, #c8a97e) 75%,
+    var(--wood-shadow, #8a7558) 100%
+  );
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+/* ── Header Image (monthly illustration) ── */
+.headerImage {
+  width: 100%;
+  max-height: 15vh;
+  min-height: 40px;
+  border-radius: var(--radius-subtle, 2px);
+  overflow: hidden;
+  border: 1px solid rgba(160,140,100,0.15);
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
+  margin-top: 4px;
+  flex-shrink: 1;
+}
+
+.headerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  padding-top: 4px;
+  border-bottom: 1px solid rgba(160,140,100,0.2);
+  padding-bottom: clamp(2px, 0.5vw, 5px);
+}
+
+.kanji {
+  font-family: var(--font-primary, 'Cormorant Garamond', serif);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 500;
+  color: var(--text-main, #4A4036);
+  line-height: 1.1;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 2px;
+}
+
+.monthJp {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+  color: var(--text-muted, #8C8074);
+  letter-spacing: 0.15em;
+}
+
+.dot {
+  color: var(--text-muted, #8C8074);
+  opacity: 0.5;
+  font-size: 0.65rem;
+}
+
+.yearLabel {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.58rem, 1vw, 0.74rem);
+  color: var(--text-muted, #8C8074);
+  letter-spacing: 0.2em;
+}
+
+
+/* ── Navigation ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.navBtn {
+  background: none;
+  border: 1px solid rgba(160,140,100,0.25);
+  color: var(--text-muted, #8C8074);
+  font-size: 0.55rem;
+  padding: 2px 7px;
+  cursor: pointer;
+  border-radius: var(--radius-subtle, 2px);
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.navBtn:hover {
+  background: rgba(0,0,0,0.04);
+  color: var(--text-main, #4A4036);
+}
+
+.navLabel {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.58rem, 1vw, 0.72rem);
+  color: var(--text-muted, #8C8074);
+  letter-spacing: 0.12em;
+}
+
+
+/* ── Weekday header row ── */
+.weekRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border-bottom: 1px solid rgba(160,140,100,0.15);
+  padding-bottom: 3px;
+}
+
+.weekLabel {
+  text-align: center;
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.5rem, 0.9vw, 0.68rem);
+  font-weight: 500;
+  color: var(--text-muted, #8C8074);
+  letter-spacing: 0.1em;
+}
+
+.weekLabel.isSunday { color: #B83A2A; }
+.weekLabel.isSaturday { color: #3A6A9A; }
+
+
+/* ── Day grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1px;
+}
+
+.day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.58rem, 1.1vw, 0.82rem);
+  color: var(--text-main, #4A4036);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 1;
+  transition: background 100ms ease, border-color 100ms ease;
+}
+
+.day:hover { background: rgba(0,0,0,0.03); }
+
+.dayNum {
+  position: relative;
+  z-index: 1;
+}
+
+/* Muted (outside month) */
+.day.muted {
+  color: rgba(160,140,110,0.3);
+  cursor: default;
+}
+.day.muted:hover { background: transparent; }
+
+/* Today — red circle */
+.day.today .dayNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(20px, 2.2vw, 28px);
+  height: clamp(20px, 2.2vw, 28px);
+  border-radius: 50%;
+  border: 2px solid #B83A2A;
+  font-weight: 600;
+}
+
+/* Sunday / holiday */
+.day.red { color: #B83A2A; font-weight: 500; }
+
+/* Saturday */
+.day.blue { color: #3A6A9A; }
+
+/* Selected endpoints */
+.day.selected {
+  background: color-mix(in srgb, var(--accent-primary, #F2C9D8) 40%, var(--shoji-paper, #F9F6F0));
+  border-color: color-mix(in srgb, var(--accent-primary, #F2C9D8) 65%, #666);
+  font-weight: 600;
+}
+
+/* In confirmed range */
+.day.inRange {
+  background: color-mix(in srgb, var(--accent-primary, #F2C9D8) 22%, transparent);
+}
+
+/* Hover preview */
+.day.preview {
+  background: color-mix(in srgb, var(--accent-primary, #F2C9D8) 14%, transparent);
+}
+
+/* Focus */
+.day:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary, #F2C9D8) 70%, #333);
+  outline-offset: 1px;
+}
+
+/* Holiday dot */
+.holidayDot {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #B83A2A;
+  opacity: 0.6;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   NOTES SECTION
+   ══════════════════════════════════════════════════════════ */
+.notesSection {
+  border-top: 1px solid rgba(160,140,100,0.2);
+  padding-top: clamp(5px, 0.8vw, 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.notesTitle {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
+  font-weight: 500;
+  color: var(--text-main, #4A4036);
+  letter-spacing: 0.08em;
+}
+
+.clearBtn {
+  background: none;
+  border: 1px solid rgba(160,140,100,0.3);
+  color: var(--text-muted, #8C8074);
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: 0.58rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: var(--radius-subtle, 2px);
+  letter-spacing: 0.06em;
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.clearBtn:hover {
+  background: rgba(0,0,0,0.04);
+  color: var(--text-main, #4A4036);
+}
+
+.rangeLabel {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.56rem, 0.95vw, 0.7rem);
+  color: color-mix(in srgb, var(--accent-primary, #F2C9D8) 70%, var(--text-main, #4A4036));
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.phaseHint {
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.5rem, 0.85vw, 0.62rem);
+  color: var(--text-muted, #8C8074);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+/* Notes textarea — lined paper effect */
+.notesInput {
+  width: 100%;
+  min-height: 44px;
+  max-height: 100px;
+  resize: vertical;
+  border: 1px solid rgba(160,140,100,0.2);
+  background:
+    /* Ruled lines */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent calc(1.15rem - 1px),
+      rgba(160,140,100,0.12) calc(1.15rem - 1px),
+      rgba(160,140,100,0.12) 1.15rem
+    ),
+    /* Base slightly different from paper */
+    color-mix(in srgb, var(--shoji-paper, #F9F6F0) 92%, #f0e8d8 8%);
+  font-family: var(--font-ui, 'Noto Sans JP', sans-serif);
+  font-size: clamp(0.6rem, 1vw, 0.74rem);
+  color: var(--text-main, #4A4036);
+  padding: 4px 6px;
+  line-height: 1.15rem;
+  border-radius: var(--radius-subtle, 2px);
+  transition: border-color 150ms ease;
+}
+
+.notesInput::placeholder {
+  color: var(--text-muted, #8C8074);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.notesInput:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-primary, #F2C9D8) 55%, rgba(160,140,100,0.4));
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .paper {
+    width: clamp(190px, 88%, 330px);
+    padding: clamp(8px, 1.2vw, 14px);
+    padding-top: 6px;
+  }
+  .kanji { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .headerImage { max-height: 14vh; }
+}
+
+@media (max-width: 768px) {
+  .paper {
+    width: clamp(260px, 92%, 420px);
+    transform: rotate(0deg);
+    padding: clamp(10px, 2.5vw, 16px);
+    padding-top: 6px;
+  }
+  .kanji { font-size: clamp(2rem, 6vw, 3rem); }
+  .notesInput { min-height: 50px; }
+  .headerImage { max-height: 16vh; }
+}

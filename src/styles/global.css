@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Noto+Sans+JP:wght@100..900&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: var(--font-ui); background: var(--shoji-paper); color: var(--text-main); }
+
+
+:root{
+    --font-primary : 'Cormorant Garamond', 'Noto Sans JP', 'serif';
+    --font-ui : 'Noto Sans JP', 'serif';
+
+    --weight-regular : 400;
+    --weight-bold : 600;
+
+
+  /* * SPACING SCALE (The concept of 'Ma')
+   * Used for padding, margins, and grid gaps. 
+   * Generous upper-end values create calm, uncluttered layouts.
+   */
+
+  --space-xs:  0.25rem;  /* 4px  - Tight gaps, like between an icon and text */
+  --space-sm:  0.5rem;   /* 8px  - Small interior padding */
+  --space-md:  1rem;     /* 16px - Standard gap between calendar days */
+  --space-lg:  1.5rem;   /* 24px - Inner padding for calendar sections */
+  --space-xl:  2.5rem;   /* 40px - Spacing between the calendar and the shoji frame */
+  --space-2xl: 4rem;     /* 64px - Major layout sections (e.g., distance to garden window) */
+
+  /* * SIZING & STRUCTURAL UNITS
+   * Specific to the Shoji and Calendar architecture.
+   */
+  --shoji-frame-thick: 1.5rem;   /* The thick outer wooden frame */
+  --shoji-kumiko-thin: 0.25rem;  /* The thin wooden grid lines over the paper */
+  
+  --calendar-cell-size: 3.5rem;  /* Ensures day blocks remain perfectly square */
+  
+  /* * BORDER RADIUS
+   * Traditional Japanese architecture relies on precise, straight lines. 
+   * Keep border-radius at zero, or extremely subtle, to mimic cut wood and paper.
+   */
+  --radius-none: 0;
+  --radius-subtle: 2px; /* Only for softening harsh interactive buttons if needed */
+  --text-xs:   0.625rem;   /* 10px - day-of-week labels */
+  --text-sm:   0.75rem;    /* 12px - muted dates, notes label */
+  --text-md:   1rem;       /* 16px - day numbers */
+  --text-lg:   1.5rem;     /* 24px - month name */
+  --text-xl:   2.5rem;     /* 40px - large month display */
+  --text-2xl:  4rem;       /* 64px - decorative year number */
+
+
+  --duration-instant:  100ms;   /* micro feedback, hover */
+  --duration-fast:     250ms;   /* date selection, button clicks */
+  --duration-normal:   500ms;   /* panel transitions */
+  --duration-slow:     1200ms;  /* page curl, season crossfade */
+  --duration-ambient:  6000ms;  /* leaf sway, light drift */
+
+  --ease-snap:    cubic-bezier(0.4, 0, 0.2, 1);   /* material standard */
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot, organic */
+  --ease-drift:   cubic-bezier(0.45, 0.05, 0.55, 0.95); /* ambient slow motion */
+  --ease-ink:     cubic-bezier(0.0, 0.0, 0.2, 1);  /* ink bleeding out */
+
+  --shadow-paper:   0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-hung:    0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lifted:  0 20px 60px rgba(0,0,0,0.2), 0 8px 20px rgba(0,0,0,0.1);
+  --shadow-inset:   inset 0 1px 4px rgba(0,0,0,0.06);
+
+  
+
+  --z-garden:      0;   /* furthest back — garden scene */
+  --z-wall:        1;   /* shoji wall surface */
+  --z-light:       2;   /* light rays on wall */
+  --z-calendar:    3;   /* the calendar paper */
+  --z-page-curl:   4;   /* lifted page during animation */
+  --z-ui:          5;   /* nav arrows, interactive controls */
+  --z-tooltip:     6;   /* hover tooltips on dates */
+}
+
+:root[data-season="spring"] {
+/* Structural Elements */
+  --shoji-paper: #F9F6F0;       /* Soft, slightly warm washi paper */
+  --wood-frame: #C8A97E;        /* Light Hinoki (cypress) wood */
+  --wood-shadow: #A6875C;       /* Depth for the shoji grid */
+  
+  /* Accent & Garden Colors */
+  --accent-primary: #F2C9D8;    /* Sakura (Cherry Blossom Pink) */
+  --accent-secondary: #C0D0A2;  /* Uguisu (Soft Matcha/Spring Green) */
+  
+  /* Typography & UI */
+  --text-main: #4A4036;         /* Soft sumi ink / brown-black */
+  --text-muted: #8C8074;
+  --border-subtle: rgba(200, 169, 126, 0.3);
+
+}
+
+:root[data-season="autumn"]{
+/* Structural Elements */
+  --shoji-paper: #F5EFE6;       /* Aged, warm paper catching afternoon light */
+  --wood-frame: #5C3A21;        /* Dark walnut/chestnut */
+  --wood-shadow: #3D2413;
+  
+  /* Accent & Garden Colors */
+  --accent-primary: #9C382A;    /* Momiji (Maple Leaf Red) */
+  --accent-secondary: #D48C45;  /* Kaki (Ripe Persimmon Orange) */
+  
+  /* Typography & UI */
+  --text-main: #3E2723;         /* Deep, warm earthy brown */
+  --text-muted: #8D6E63;
+  --border-subtle: rgba(92, 58, 33, 0.3);
+}
+
+:root[data-season="summer"]{
+/* Structural Elements */
+  --shoji-paper: #FDFCF8;       /* Brighter, cooler white for harsh summer sun */
+  --wood-frame: #8A5A44;        /* Medium rich cedar */
+  --wood-shadow: #6A402D;
+  
+  /* Accent & Garden Colors */
+  --accent-primary: #1C3144;    /* Ai (Deep Indigo dye) */
+  --accent-secondary: #4A7C59;  /* Take (Deep Bamboo Green) */
+  
+  /* Typography & UI */
+  --text-main: #2B2B2B;         /* Darker charcoal */
+  --text-muted: #707070;
+  --border-subtle: rgba(138, 90, 68, 0.3);
+}
+
+:root[data-season="winter"]{
+    /* Structural Elements */
+  --shoji-paper: #F0F4F8;       /* Cool, icy white reflecting snow */
+  --wood-frame: #3E3B3A;        /* Yakisugi (Charred cedar wood) */
+  --wood-shadow: #211F1F;
+  
+  /* Accent & Garden Colors */
+  --accent-primary: #8B4A5B;    /* Tsubaki (Winter Camellia Red) */
+  --accent-secondary: #758A94;  /* Fuyu-zora (Winter sky/slate blue) */
+  
+  /* Typography & UI */
+  --text-main: #1A1A1A;         /* High contrast black */
+  --text-muted: #606060;
+  --border-subtle: rgba(62, 59, 58, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
